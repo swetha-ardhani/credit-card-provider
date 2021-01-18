@@ -1,0 +1,10 @@
+server:
+  servlet:
+    context-path: /credit-card
+  port: 8080
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
