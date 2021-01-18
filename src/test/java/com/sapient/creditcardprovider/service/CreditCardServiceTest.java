@@ -49,6 +49,7 @@ public class CreditCardServiceTest {
 
     @Test
     public void shouldReturnNonNullResponseList_whenGetIsCalled() {
+        creditCardDetails = new ArrayList<>();
         creditCard = CreditCard.builder().name("John").cardNumber("1234").creditLimit(new BigDecimal(1200)).balance(new BigDecimal(0)).build();
         creditCardDetails.add(creditCard);
         when(creditCardRepository.findAll()).thenReturn(creditCardDetails);
