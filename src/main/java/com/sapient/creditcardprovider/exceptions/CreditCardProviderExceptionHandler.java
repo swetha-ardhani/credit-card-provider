@@ -14,11 +14,23 @@ public class CreditCardProviderExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorMessage handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        String exMessage = "Status " + HttpStatus.BAD_REQUEST + " - Invalid field : " + ex.getBindingResult().getFieldError().getField();
+        String exMessage = " Invalid field : " + ex.getBindingResult().getFieldError().getField();
         ErrorMessage error = new ErrorMessage();
         error.setHttpCode(HttpStatus.BAD_REQUEST.toString().substring(0, 3));
         error.setHttpMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
         error.setMessage(exMessage);
         return error;
     }
+
+    @ExceptionHandler(CreditCardProviderException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorMessage handleCreditCardProviderException(CreditCardProviderException ex) {
+        ErrorMessage error = new ErrorMessage();
+        error.setHttpCode(HttpStatus.BAD_REQUEST.toString().substring(0, 3));
+        error.setHttpMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
+        error.setMessage(ex.getMessage());
+        return error;
+    }
+
+
 }

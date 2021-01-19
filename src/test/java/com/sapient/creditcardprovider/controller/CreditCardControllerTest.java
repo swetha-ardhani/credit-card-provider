@@ -3,6 +3,7 @@ package com.sapient.creditcardprovider.controller;
 import com.sapient.creditcardprovider.dao.CreditCard;
 import com.sapient.creditcardprovider.dto.CreditCardProviderRequest;
 import com.sapient.creditcardprovider.dto.CreditCardProviderResponse;
+import com.sapient.creditcardprovider.exceptions.CreditCardProviderException;
 import com.sapient.creditcardprovider.service.CreditCardService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class CreditCardControllerTest {
     }
 
     @Test
-    public void shouldReturn201Response_whenValidRequestIsSent() {
+    public void shouldReturn201Response_whenValidRequestIsSent() throws CreditCardProviderException {
         when(creditCardService.addDetails(any())).thenReturn(creditCardProviderResponse);
         ResponseEntity<CreditCardProviderResponse> response = creditCardController.addCreditCardDetails(creditCardProviderRequest);
         Assert.assertTrue(response.getStatusCode()== HttpStatus.CREATED);

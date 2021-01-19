@@ -3,6 +3,7 @@ package com.sapient.creditcardprovider.service;
 import com.sapient.creditcardprovider.dao.CreditCard;
 import com.sapient.creditcardprovider.dto.CreditCardProviderRequest;
 import com.sapient.creditcardprovider.dto.CreditCardProviderResponse;
+import com.sapient.creditcardprovider.exceptions.CreditCardProviderException;
 import com.sapient.creditcardprovider.repository.CreditCardRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -40,7 +41,7 @@ public class CreditCardServiceTest {
     }
 
     @Test
-    public void shouldReturnNonNullResponse_whenValidRequestIsReceived() {
+    public void shouldReturnNonNullResponse_whenValidRequestIsReceived() throws CreditCardProviderException {
         creditCard = CreditCard.builder().name("John").cardNumber("1234").creditLimit(new BigDecimal(1200)).balance(new BigDecimal(0)).build();
         when(creditCardRepository.save(any())).thenReturn(creditCard);
         CreditCardProviderResponse response = creditCardService.addDetails(creditCardProviderRequest);

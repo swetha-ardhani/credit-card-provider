@@ -3,6 +3,7 @@ package com.sapient.creditcardprovider.controller;
 import com.sapient.creditcardprovider.dao.CreditCard;
 import com.sapient.creditcardprovider.dto.CreditCardProviderRequest;
 import com.sapient.creditcardprovider.dto.CreditCardProviderResponse;
+import com.sapient.creditcardprovider.exceptions.CreditCardProviderException;
 import com.sapient.creditcardprovider.service.CreditCardService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -35,7 +36,7 @@ public class CreditCardController {
             produces = {"application/json; charset=utf-8"},
             consumes = {"application/json; charset=utf-8"}
     )
-    public ResponseEntity<CreditCardProviderResponse> addCreditCardDetails(@Valid @RequestBody CreditCardProviderRequest creditCardProviderRequest) {
+    public ResponseEntity<CreditCardProviderResponse> addCreditCardDetails(@Valid @RequestBody CreditCardProviderRequest creditCardProviderRequest) throws CreditCardProviderException {
         CreditCardProviderResponse response = creditCardService.addDetails(creditCardProviderRequest);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
