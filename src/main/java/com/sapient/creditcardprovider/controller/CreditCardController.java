@@ -37,6 +37,7 @@ public class CreditCardController {
             consumes = {"application/json; charset=utf-8"}
     )
     public ResponseEntity<CreditCardProviderResponse> addCreditCardDetails(@Valid @RequestBody CreditCardProviderRequest creditCardProviderRequest) throws CreditCardProviderException {
+        log.info("Received Request to Add Credit Card Account");
         CreditCardProviderResponse response = creditCardService.addDetails(creditCardProviderRequest);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -47,6 +48,7 @@ public class CreditCardController {
 
     @GetMapping("/Get all")
     public ResponseEntity<List<CreditCard>> getAllCreditCardDetails() {
+        log.info("Received Request to Get All Credit Card Accounts");
         List<CreditCard> creditCardList = creditCardService.getDetails();
         return new ResponseEntity<>(creditCardList, HttpStatus.OK);
     }

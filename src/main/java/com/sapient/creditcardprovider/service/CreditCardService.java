@@ -6,6 +6,7 @@ import com.sapient.creditcardprovider.dto.CreditCardProviderResponse;
 import com.sapient.creditcardprovider.exceptions.CreditCardProviderException;
 import com.sapient.creditcardprovider.repository.CreditCardRepository;
 import com.sapient.creditcardprovider.util.MessageBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sapient.creditcardprovider.validators.ValidationResult;
@@ -14,6 +15,7 @@ import com.sapient.creditcardprovider.validators.ValidatorService;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CreditCardService {
 
     @Autowired
@@ -23,6 +25,7 @@ public class CreditCardService {
     private ValidatorService validatorService;
 
     public CreditCardProviderResponse addDetails(CreditCardProviderRequest creditCardProviderRequest) throws CreditCardProviderException {
+        log.info("Entered CreditCardService " );
         ValidationResult validationResult = validatorService.validateAll(creditCardProviderRequest);
         if (!validationResult.isValid()) {
             throw new CreditCardProviderException(validationResult.getValidateMsg());
